@@ -42,11 +42,8 @@ if CONFIG.BOT_PASSWORD:
         )
     )
 
+# Start the bot
+    await app.start()
+
 if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    loop.create_task(app.start())
-    try:
-        loop.run_forever()
-    except (KeyboardInterrupt, SystemExit):
-        loop.run_until_complete(app.stop())
-        loop.close()
+    asyncio.run(main())
