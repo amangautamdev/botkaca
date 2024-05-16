@@ -9,7 +9,8 @@ LOGGER = logging.getLogger(__name__)
 # create /set_tracker handler
 
 
-from pyrogram import Client, Filters
+from pyrogram import Client
+from pyrogram.filters import Filters
 from pyrogram.types import Message
 from bot import LOCAL, STATUS, CONFIG, COMMAND
 
