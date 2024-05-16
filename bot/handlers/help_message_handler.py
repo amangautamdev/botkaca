@@ -1,4 +1,5 @@
-from pyrogram import Client, Message, Filters
+from pyrogram import Client, Filters
+from pyrogram.types import Message
 from bot import COMMAND, LOCAL
 
 @Client.on_message(Filters.command(COMMAND.HELP))
