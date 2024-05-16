@@ -1,4 +1,5 @@
-from pyrogram import Client, Message, Filters
+from pyrogram import Client, Filters
+from pyrogram.types import Message
 from os.path import join as os_path_join
 from bot import COMMAND, LOCAL, CONFIG
 from bot.plugins import thumbnail_video
