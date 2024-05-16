@@ -1,48 +1,48 @@
 from os.path import join as os_path_join
-from pyrogram.handlers import MessageHandler
 from pyrogram import Client, filters
-from pyrogram.types import Message
+from pyrogram.handlers import MessageHandler
 from bot import CONFIG, COMMAND, LOCAL, LOGGER, STATUS
 from bot.handlers import *
 import asyncio
 
-# Initialize bot
-app = Client(
-    "Bot",
-    bot_token=CONFIG.BOT_TOKEN,
-    api_id=CONFIG.API_ID,
-    api_hash=CONFIG.API_HASH,
-    workdir=os_path_join(CONFIG.ROOT, CONFIG.WORKDIR),
-    plugins=dict(root="bot/handlers")
-)
-app.set_parse_mode("html")
-
-# register /start handler
-app.add_handler(
-    MessageHandler(
-        start_message_handler.func,
-        filters=filters.command(COMMAND.START)
+async def main():
+    # Initialize bot
+    app = Client(
+        "Bot",
+        bot_token=CONFIG.BOT_TOKEN,
+        api_id=CONFIG.API_ID,
+        api_hash=CONFIG.API_HASH,
+        workdir=os_path_join(CONFIG.ROOT, CONFIG.WORKDIR),
+        plugins=dict(root="bot/handlers")
     )
-)
+    app.set_parse_mode("html")
 
-if CONFIG.BOT_PASSWORD:
-    # register /pass handler
+    # Register /start handler
     app.add_handler(
         MessageHandler(
-            password_handler.func,
-            filters = filters.command(COMMAND.PASSWORD)
+            start_message_handler.func,
+            filters=filters.command(COMMAND.START)
         )
     )
 
-    # take action on unauthorized chat room
-    app.add_handler(
-        MessageHandler(
-            wrong_room_handler.func,
-            filters = lambda msg: not msg.chat.id in STATUS.CHAT_ID
+    if CONFIG.BOT_PASSWORD:
+        # Register /pass handler
+        app.add_handler(
+            MessageHandler(
+                password_handler.func,
+                filters=filters.command(COMMAND.PASSWORD)
+            )
         )
-    )
 
-# Start the bot
+        # Take action on unauthorized chat room
+        app.add_handler(
+            MessageHandler(
+                wrong_room_handler.func,
+                filters=lambda msg: msg.chat.id not in STATUS.CHAT_ID
+            )
+        )
+
+    # Start the bot
     await app.start()
 
 if __name__ == '__main__':
