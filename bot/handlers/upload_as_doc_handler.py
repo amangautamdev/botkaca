@@ -1,5 +1,4 @@
 from pyrogram import Client,filters
-from pyrogram.filters import Filters
 from pyrogram.types import Message
 from bot import LOCAL, STATUS, COMMAND
 
