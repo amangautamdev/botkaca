@@ -12,8 +12,7 @@ from re import match as re_match
 from asyncio import sleep as asyncio_sleep
 from os.path import join as os_path_join
 from math import floor
-from pyrogram import Client
-from pyrogram.filters import Filters
+from pyrogram import Client,filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from aria2p.downloads import Download, File
 from bot import LOCAL, STATUS, CONFIG, COMMAND
@@ -21,7 +20,7 @@ from bot.plugins import aria2, zipfile
 from bot.handlers import upload_to_tg_handler
 from bot.handlers import cancel_leech_handler
 
-@Client.on_message(Filters.command(COMMAND.LEECH))
+@Client.on_message(filters.command(COMMAND.LEECH))
 async def func(client : Client, message: Message):
     args = message.text.split(" ")
     if len(args) <= 1:        
