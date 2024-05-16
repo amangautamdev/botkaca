@@ -9,7 +9,8 @@ LOGGER = logging.getLogger(__name__)
 # create /list handler
 
 from os.path import join as os_path_join
-from pyrogram import Client, Filters
+from pyrogram import Client
+from pyrogram.filters import Filters
 from pyrogram.types import Message
 from aria2p import Download
 from bot import LOCAL, STATUS, CONFIG, COMMAND
