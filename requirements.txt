@@ -2,3 +2,4 @@ asyncio
 tgcrypto
 appdirs
 aria2p
+pyrogram
